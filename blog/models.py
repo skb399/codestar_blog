@@ -21,11 +21,21 @@ class Post(models.Model):
     User, on_delete=models.CASCADE, related_name="blog_posts"
     
 )
+    class Meta:
+        ordering = ["created_on", "author"]
+           
+    def __str__(self):
+        return f"The title of this post is {self.title} written by {self.author}."      
+        
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
     excerpt = models.TextField(blank=True)
     updated_on = models.DateTimeField(auto_now=True)
+    
+  
+    
+    
 
 # This model is for comments on the blog posts. It has a foreign key to the Post model, which means that each
 # comment is associated with a specific post. The author of the comment is also a foreign key to the User model, 
@@ -39,4 +49,12 @@ class Comment(models.Model):
         User, on_delete=models.CASCADE, related_name="commenter")
     body = models.TextField()
     approved = models.BooleanField(default=False)
-    created_on = models.DateTimeField(auto_now_add=True)   
+    created_on = models.DateTimeField(auto_now_add=True)
+    
+    # This class is used to specify the ordering of the comments. In this case, the comments will be ordered by
+    # the created_on field in ascending order.
+    class Meta:
+        ordering = ["created_on"]
+        
+    def __str__(self):
+        return f"Comment {self.body} by {self.author}"   
