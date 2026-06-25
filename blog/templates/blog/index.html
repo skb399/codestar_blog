@@ -1,3 +1,5 @@
+<!--Extends means this template inherits from base.html, block means this section will override 
+the corresponding block in the base template-->
 {% extends "base.html" %} {% block content %}
 
 <!-- index.html content starts here -->
@@ -15,7 +17,8 @@
                   <p class="author">Author: {{ post.author }}</p>
                 </div>
               </div>
-              <a href="#" class="post-link">
+              <!-- This code binds the URL pattern for the post detail page to the post_detail view function. -->
+              <a href="{% url 'post_detail' post.slug %}" class="post-link">
                 <h2 class="card-title">{{ post.title }}</h2>
                 <p class="card-text">{{ post.excerpt }}</p>
               </a>

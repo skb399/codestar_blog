@@ -1,0 +1,42 @@
+[1mdiff --git a/blog/__pycache__/models.cpython-313.pyc b/blog/__pycache__/models.cpython-313.pyc[m
+[1mindex eacf053..866482c 100644[m
+Binary files a/blog/__pycache__/models.cpython-313.pyc and b/blog/__pycache__/models.cpython-313.pyc differ
+[1mdiff --git a/blog/models.py b/blog/models.py[m
+[1mindex 0de0d44..d7f3c6a 100644[m
+[1m--- a/blog/models.py[m
+[1m+++ b/blog/models.py[m
+[36m@@ -21,11 +21,21 @@[m [mclass Post(models.Model):[m
+     User, on_delete=models.CASCADE, related_name="blog_posts"[m
+     [m
+ )[m
+[32m+[m[32m    class Meta:[m
+[32m+[m[32m        ordering = ["created_on", "author"][m
+[32m+[m[41m           [m
+[32m+[m[32m    def __str__(self):[m
+[32m+[m[32m        return f"The title of this post is {self.title} written by {self.author}."[m[41m      [m
+[32m+[m[41m        [m
+     content = models.TextField()[m
+     created_on = models.DateTimeField(auto_now_add=True)[m
+     status = models.IntegerField(choices=STATUS, default=0)[m
+     excerpt = models.TextField(blank=True)[m
+     updated_on = models.DateTimeField(auto_now=True)[m
+[32m+[m[41m    [m
+[32m+[m[41m  [m
+[32m+[m[41m    [m
+[32m+[m[41m    [m
+ [m
+ # This model is for comments on the blog posts. It has a foreign key to the Post model, which means that each[m
+ # comment is associated with a specific post. The author of the comment is also a foreign key to the User model, [m
+[36m@@ -39,4 +49,11 @@[m [mclass Comment(models.Model):[m
+         User, on_delete=models.CASCADE, related_name="commenter")[m
+     body = models.TextField()[m
+     approved = models.BooleanField(default=False)[m
+[31m-    created_on = models.DateTimeField(auto_now_add=True)   [m
+[32m+[m[32m    created_on = models.DateTimeField(auto_now_add=True)[m
+[32m+[m[41m    [m
+[32m+[m[41m    [m
+[32m+[m[32m    class Meta:[m
+[32m+[m[32m        ordering = ["created_on"][m
+[32m+[m[41m        [m
+[32m+[m[32m    def __str__(self):[m
+[32m+[m[32m        return f"Comment {self.body} by {self.author}"[m[41m   [m
