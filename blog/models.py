@@ -58,3 +58,11 @@ class Comment(models.Model):
         
     def __str__(self):
         return f"Comment {self.body} by {self.author}"   
+
+#this model is for the about page. It has a title, slug, content, and updated_on fields. The title and slug
+# fields are unique, which means that no two about pages can have the same title or slug
+class About(models.Model):
+    title = models.CharField(max_length=200, unique=True)
+    slug = models.SlugField(max_length=200, unique=True)
+    content = models.TextField()
+    updated_on = models.DateTimeField(auto_now=True)

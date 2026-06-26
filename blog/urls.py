@@ -1,7 +1,12 @@
 from . import views
-from django.urls import path
+from django.urls import include, path
+
+path("about/", include("about.urls"), name="about-urls"),
+
 
 urlpatterns = [
+    
+    
      
     #this code is used to display the home page of the blog, which is a list of posts. 
     # The PostList view is a class-based view that inherits from Django's generic ListView. 
