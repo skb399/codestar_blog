@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 
+from cloudinary.models import CloudinaryField
+
 from django.db import models
 
 
@@ -29,7 +31,8 @@ class Post(models.Model):
            
     def __str__(self):
         return f"The title of this post is {self.title} written by {self.author}."      
-        
+    
+    featured_image = CloudinaryField('image', default='placeholder')    
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
